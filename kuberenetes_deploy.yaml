@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dva-forecast-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dva-forecast-app
+  template:
+    metadata:
+      labels:
+        app: dva-forecast-app
+    spec:
+      containers:
+      - name: dva-forecast-app
+        image: dva-forecast-app:latest
+        imagePullPolicy: Always
+        env:
+        - name: CONFIG_FILE
+          value: "/app/config.py"
+
+

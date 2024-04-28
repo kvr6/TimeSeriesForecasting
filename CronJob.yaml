@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dva-forecast-job
+spec:
+  schedule: "0 0 * * *"  # Run daily at midnight
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dva-forecast-job
+            image: dva-forecast-app:latest
+            imagePullPolicy: Always
+            command: ["python", "dva_forecast_generation.py"]
+          restartPolicy: OnFailure
+
+
